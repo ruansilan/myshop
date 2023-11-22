@@ -9,7 +9,7 @@ const memberStore = useMemberStore()
 const getData = async () => {
   const res = await http<string[]>({
     method: 'GET',
-    url:'/member/profile'
+    url:'/home/banner'
   })
   console.log(res.result)
 }
