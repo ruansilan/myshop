@@ -18,3 +18,18 @@ export type CategoryItem = {
   /** 展示图标 */
   icon: string
 }
+
+export type HotItem = {
+  /** id */
+  id: string
+  /** 推荐说明 */
+  alt: string
+  /** 图片集合 */
+  pictures: string[]
+  /** 跳转地址 */
+  target: string
+  /** 推荐标题 */
+  title: string
+  /** 推荐类型 */
+  type: string
+}
