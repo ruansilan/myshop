@@ -33,6 +33,21 @@ const scrolltolower = () => {
 	gussRef.value?.getMore()
 }
 
+// 下拉刷新
+const reTriggered = ref(false)
+const onPulldownRefresh = async () => {
+	reTriggered.value = true
+	gussRef.value?.resetData()
+	await Promise.all([
+		getHomeBannerData(),
+		getHomeCategoryData(),
+		getHomeHotData(),
+		gussRef.value?.getMore()]
+	)
+	
+	reTriggered.value = false
+}
+
 onLoad(() => {
 	getHomeBannerData()
 	getHomeCategoryData()
@@ -43,7 +58,14 @@ onLoad(() => {
 <template>
 	<!-- 自定义导航栏 -->
   <CustomNavbar/>
-	<scroll-view @scrolltolower="scrolltolower" scroll-y class="scroll-view">
+	<scroll-view 
+		refresher-enabled
+		scroll-y class="scroll-view"
+		:refresher-triggered="reTriggered"
+		@refresherrefresh="onPulldownRefresh" 
+		@scrolltolower="scrolltolower" 
+		
+	>
 		<!-- 轮播图 -->
 		<CusSwiper :list="bannerList"/>
 		<!-- 分类 -->

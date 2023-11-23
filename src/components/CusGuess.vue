@@ -55,12 +55,19 @@ const getHomeGuessData = async () => {
   
 }
 
+const resetData = () => {
+  pageParams.page = 1
+  isFinish.value = false
+  guessList.value = []
+}
+
 onMounted(() => {
   getHomeGuessData()
 })
 
 defineExpose({
-	getMore:getHomeGuessData
+  getMore: getHomeGuessData,
+  resetData
 })
 </script>
 
