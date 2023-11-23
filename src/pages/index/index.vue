@@ -2,12 +2,14 @@
 import CustomNavbar from './components/CustomNavbar.vue';
 import CategoryPanel from './components/CategoryPanel.vue';
 import HotPanel from './components/HotPanel.vue'
+import PageSkeleton from './components/PageSkeleton.vue'
 import { getHomeBannerApi, getHomeCategoryApi, getHomeHotApi } from '@/services/home';
 import { onLoad } from '@dcloudio/uni-app';
 import { ref } from 'vue';
 import type { BannerItem, CategoryItem, HotItem } from '@/types/home'
 import type{ CusGuessIncetance } from '@/types/component';
 
+const isLoading = ref(false)
 
 // 获取轮播图
 const bannerList = ref<BannerItem[]>([])
@@ -48,10 +50,14 @@ const onPulldownRefresh = async () => {
 	reTriggered.value = false
 }
 
-onLoad(() => {
-	getHomeBannerData()
-	getHomeCategoryData()
-	getHomeHotData()
+onLoad(async () => {
+	isLoading.value = true
+	await Promise.all([
+		getHomeBannerData(),
+		getHomeCategoryData(),
+		getHomeHotData()
+	])
+	isLoading.value = false
 })
 </script>
 
@@ -66,6 +72,8 @@ onLoad(() => {
 		@scrolltolower="scrolltolower" 
 		
 	>
+	<PageSkeleton v-if="isLoading"/>
+	<template v-else>
 		<!-- 轮播图 -->
 		<CusSwiper :list="bannerList"/>
 		<!-- 分类 -->
@@ -74,6 +82,8 @@ onLoad(() => {
 		<HotPanel :list="hotList"/>
 		<!-- 猜你喜欢 -->
 		<CusGuess ref="gussRef"/>
+	</template>
+		
 	</scroll-view>
 	
 </template>
