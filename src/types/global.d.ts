@@ -21,7 +21,9 @@ export type PageParams = {
   /** 页码：默认值为 1 */
   page?: number
   /** 页大小：默认值为 10 */
-  pageSize?: number
+  pageSize?: number,
+
+  [params: string]: any
 }
 
 /** 通用分页结果类型 */

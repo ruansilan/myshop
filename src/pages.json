@@ -12,6 +12,7 @@
     {
       "path": "pages/index/index",
       "style": {
+        "navigationStyle": "custom",
         "navigationBarTitleText": "首页"
       }
     },
@@ -40,14 +41,13 @@
       }
     },
     {
-      "path": "pages/index/components/CustomNavbar",
+      "path": "pages/hot/hot",
       "style": {
-        "navigationBarTitleText": "CustomNavbar"
+        "navigationBarTitleText": "热门推荐"
       }
     }
   ],
   "globalStyle": {
-    "navigationStyle": "custom",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "",
     "navigationBarBackgroundColor": "#F8F8F8",

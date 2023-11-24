@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { getHomeGuessApi } from '@/services/home';
-import type{ PageParams } from '@/types/global';
+import type{ PageParams } from '@/types/global.js';
 import type{ GuessItem } from '@/types/home'
 import { ref, onMounted,reactive } from 'vue'
 // 猜你喜欢
